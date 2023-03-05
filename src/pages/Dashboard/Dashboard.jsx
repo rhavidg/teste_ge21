@@ -48,7 +48,6 @@ function Dashboard() {
   async function getAvatars() {
     try {
       const response = await service.CoreService.getAvatars();
-      console.log(response.data.data);
       setUserList(response.data.data);
       return setDisplayList(response.data.data);
     } catch (err) {
@@ -80,20 +79,16 @@ function Dashboard() {
               onChange={(e) => {
                 setSearch(e.target.value);
                 const filteredArray = userList.filter((user) => {
-                  console.log(e.target.value);
                   const filter = user.first_name
                     .toLowerCase()
                     .includes(e.target.value.toLowerCase());
 
                   const array = [];
-                  console.log("Filter: ", filter);
+
                   if (filter === true) {
                     array.push(user);
-                    console.log("Array:", array);
-                    console.log("Tipo: ", typeof displayList);
+
                     setDisplayList(array);
-                    console.log("Display:", displayList);
-                    //return setDisplayList({ ...array });
                   }
                   if (e.target.value.length < 1) {
                     setDisplayList(userList);
